@@ -1,0 +1,26 @@
+{
+  "name": "backend-batch-4",
+  "version": "1.0.0",
+  "description": "API untuk project backend di batch 4 Sinau Koding Academy",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "build": "node src/index.js"
+  },
+  "author": "Anisa Fitriyani",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "latest",
+    "eslint": "latest",
+    "eslint-config-airbnb-base": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-prettier": "latest",
+    "prettier": "latest"
+  },
+  "dependencies": {
+    "express": "latest",
+    "cors": "latest",
+    "dotenv": "latest"
+  }
+}
