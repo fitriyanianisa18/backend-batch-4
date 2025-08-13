@@ -26,4 +26,22 @@ app.use('/', router);
 app.use('/api/user', userRouter)
 app.use('/api/todo', todoRouter)
 
+// handle error jika route tidak ditemukan
+app.get ('/*splat',async (req, res, next) => {
+    return res.status(400).json({
+        message: "Route not found",
+        data: null
+    })
+})
+
+// global error handling untuk tiap service
+app.use ((err, req, res, next) => {
+    console.log("Terjadi error", err.stack || err)
+
+    return res.status(err.status || 500).json({
+        message: "Terjadi error",
+        data: err.message || "Internal server error"
+    })
+})
+
 app.listen(process.env.SERVER_PORT, () => {console.log('Server Running')});
