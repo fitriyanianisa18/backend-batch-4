@@ -7,6 +7,7 @@ const compression = require('compression');
 const router = require('./routes/router');
 const userRouter = require('./routes/userRouter')
 const todoRouter = require('./routes/todoRouter')
+const uploadRouter = require('./routes/uploadRouter')
 
 // import custom middleware
 const {logger} = require('./middleware/logger');
@@ -16,6 +17,7 @@ const app = express();
 
 // use middleware
 app.use(logger)
+app.use('/static', express.static('public'))
 app.use(compression())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -25,6 +27,7 @@ app.use(cors({ origin: true, credentials: true }));
 app.use('/', router);
 app.use('/api/user', userRouter)
 app.use('/api/todo', todoRouter)
+app.use('/api/upload', uploadRouter)
 
 // handle error jika route tidak ditemukan
 app.get ('/*splat',async (req, res, next) => {
