@@ -2,10 +2,10 @@
   "name": "backend-batch-4",
   "version": "1.0.0",
   "description": "API untuk project backend di batch 4 Sinau Koding Academy",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js",
-    "build": "node src/index.js"
+    "start": "node api/index.js",
+    "dev": "nodemon api/index.js"
   },
   "author": "Anisa Fitriyani",
   "license": "MIT",
