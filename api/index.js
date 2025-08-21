@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const compression = require('compression');
+const PORT = process.env.SERVER_PORT || 3000
 
 // import router
 const router = require('../src/routes/router');
@@ -47,4 +48,4 @@ app.use ((err, req, res, next) => {
     })
 })
 
-app.listen(process.env.SERVER_PORT, () => {console.log('Server Running')});
+app.listen(PORT, () => {console.log('Server Running')});
