@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Role {
+  id    BigInt @id @default(autoincrement())
+  name  String @unique
+  users User[]
+}
+
+model User {
+  id           BigInt        @id @default(autoincrement())
+  username     String        @unique
+  password     String
+  role_id      BigInt?
+  role         Role?         @relation(fields: [role_id], references: [id], onDelete: SetNull)
+  transactions Transaction[]
+}
+
+model Product {
+  id               BigInt            @id @default(autoincrement())
+  name             String
+  description      String?
+  price            Decimal
+  stock            Int
+  transactionItems TransactionItem[]
+}
+
+model Transaction {
+  id               BigInt            @id @default(autoincrement())
+  user_id          BigInt
+  user             User              @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  transaction_date DateTime          @default(now()) @db.Timestamptz(6)
+  total_amount     Decimal
+  items            TransactionItem[]
+}
+
+model TransactionItem {
+  id             BigInt      @id @default(autoincrement())
+  transaction_id BigInt
+  product_id     BigInt
+  quantity       Int
+  price          Decimal
+  transaction    Transaction @relation(fields: [transaction_id], references: [id], onDelete: Cascade)
+  product        Product     @relation(fields: [product_id], references: [id], onDelete: Cascade)
+}
